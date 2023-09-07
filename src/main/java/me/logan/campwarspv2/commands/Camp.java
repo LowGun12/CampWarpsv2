@@ -32,15 +32,20 @@ public class Camp implements CommandExecutor {
 
     public Inventory createInv() {
         int size = plugin.getConfig().getInt("GuiSize");
-        Inventory campGui = Bukkit.createInventory(null, size, ChatColor.GREEN.toString() + ChatColor.BOLD + "Camps");
+        Inventory campGui = Bukkit.createInventory(null, size, ChatColor.GREEN.toString() + ChatColor.BOLD + plugin.getConfig().getString("GuiName"));
 
         // Load camp items from the configuration and add them to the inventory
-        for (String key : plugin.getConfig().getKeys(false)) {
-            if (key.endsWith(".Item")) {
-                String serializedItem = plugin.getConfig().getString(key);
-                ItemStack campItem = ItemStackSerializer.deserializeItemStack(serializedItem);
-                if (campItem != null) {
-                    campGui.addItem(campItem);
+        if (plugin.getConfig().contains("camps")) {
+            for (String key : plugin.getConfig().getConfigurationSection("camps").getKeys(false)) {
+                String path = "camps." + key;
+                if (plugin.getConfig().contains(path + ".Item")) {
+                    String serializedItem = plugin.getConfig().getString(path + ".Item");
+                    ItemStack campItem = ItemStackSerializer.deserializeItemStack(serializedItem);
+                    if (campItem != null) {
+                        int slot = plugin.getConfig().getInt(path + ".Slot", 0);
+                        campGui.setItem(slot, campItem);
+                        plugin.getLogger().info("Added item to camp gui " + campItem.getType().toString());
+                    }
                 }
             }
         }

@@ -27,25 +27,26 @@ public class delCamp implements CommandExecutor {
             return false;
         }
 
-        Player p = (Player) sender;
-        if (!p.hasPermission("camp.delwarp")) {
-            p.sendMessage(ColorUtils.colorize("&cNo permission for this"));
+        Player player = (Player) sender;
+        if (!player.hasPermission("camp.delwarp")) {
+            player.sendMessage(ColorUtils.colorize("&cNo permission for this"));
             return false;
         }
 
         if (args.length == 0) {
-            p.sendMessage(ColorUtils.colorize("&cIncorrect usage, please provide a name"));
+            player.sendMessage(ColorUtils.colorize("&cIncorrect usage, please provide a name"));
             return false;
         }
 
         String name = args[0].toLowerCase();
-        if (plugin.getConfig().get(name) == null) {
-            p.sendMessage(ColorUtils.colorize("&cThis warp doesn't exist"));
+        String campPath = "camps." + name;
+        if (plugin.getConfig().get(campPath) == null) {
+            player.sendMessage(ColorUtils.colorize("&cThis warp doesn't exist"));
             return false;
         }
 
         // Remove the item from the /camp GUI
-        Inventory campGui = plugin.getGuiClass().getOrCreateCampGui(p);
+        Inventory campGui = plugin.getGuiClass().getOrCreateCampGui(player);
         ItemStack[] contents = campGui.getContents();
 
         for (int i = 0; i < contents.length; i++) {
@@ -61,10 +62,10 @@ public class delCamp implements CommandExecutor {
         }
 
         // Remove the camp from the configuration
-        plugin.getConfig().set(name, null);
+        plugin.getConfig().set(campPath, null);
         plugin.saveConfig();
 
-        p.sendMessage(ColorUtils.colorize("&aWarp " + name + " deleted"));
+        player.sendMessage(ColorUtils.colorize("&aWarp " + name + " deleted"));
         return true;
     }
 }

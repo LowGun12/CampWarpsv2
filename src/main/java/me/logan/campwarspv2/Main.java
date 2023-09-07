@@ -22,7 +22,7 @@ public final class Main extends JavaPlugin {
         new setCamp(this);
         new delCamp(this);
         Bukkit.getPluginManager().registerEvents(new GuiListener(this), this);
-        loadCampItems();
+
 
     }
 
@@ -31,31 +31,6 @@ public final class Main extends JavaPlugin {
     {
         return camp;
     }
-
-
-    private void loadCampItems() {
-        this.getLogger().info("Loading camp items");
-        campGui = camp.createInv();
-
-        for (String key : getConfig().getKeys(false)) {
-            if (getConfig().contains(key + ".Item")) {
-                String serializedItem = getConfig().getString(key + ".Item");
-                ItemStack campItem = ItemStackSerializer.deserializeItemStack(serializedItem);
-                if (campItem != null) {
-                    int slot = getConfig().getInt(key + ".Slot", 0);
-                    campGui.setItem(slot, campItem);
-                    this.getLogger().info("Added item to camp gui " + campItem.getType().toString());
-                }
-            }
-        }
-        this.getLogger().info("Camp items loaded successfully.");
-    }
-
-
-
-
-
-
 
     private void loadConfig() {
         getConfig().options().copyDefaults(true);
