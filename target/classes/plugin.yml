@@ -16,3 +16,8 @@ commands:
     permission: camp.setwarp
   delcamp:
     permission: camp.delwarp
+  campreload:
+    aliases:
+      - camprestart
+      - camprebiit
+    permission: camp.reload

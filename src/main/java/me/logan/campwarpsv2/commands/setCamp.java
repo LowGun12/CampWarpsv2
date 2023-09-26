@@ -40,23 +40,22 @@ public class setCamp implements CommandExecutor {
             if (mainHandCheck == null || mainHandCheck.getType().isAir()) {
                 player.sendMessage(ColorUtils.colorize("&cYou must be holding an item in your main hand to use this command"));
             } else {
-
-                String campName = args[0];
+                String campName = ColorUtils.colorize(args[0]);
                 String configCampName = campName.toLowerCase();
                 ItemStack campItem = player.getInventory().getItemInMainHand().clone();
                 if (campItem != null) {
                     ItemMeta itemMeta = campItem.getItemMeta();
                     if (itemMeta != null) {
-                        itemMeta.setDisplayName(ColorUtils.colorize(campName));
+                        itemMeta.setDisplayName(campName);
                         itemMeta.setLore(Collections.singletonList(ColorUtils.colorize("&7&lClick to teleport to the continent of " + campName)));
                         campItem.setItemMeta(itemMeta);
 
-                        // Save camp information under the "camps" section in config.yml
+
                         String path = "camps." + configCampName + ".";
                         plugin.getConfig().set(path + "Item", ItemStackSerializer.serializeItemStack(campItem));
 
                         Camp camp = plugin.getGuiClass();
-                        Inventory campGui = camp.getOrCreateCampGui(player); // Use the same instance
+                        Inventory campGui = camp.getOrCreateCampGui(player);
                         int slot = campGui.firstEmpty();
 
                         Location loc = player.getLocation();

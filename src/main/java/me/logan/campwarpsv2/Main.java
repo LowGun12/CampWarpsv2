@@ -2,6 +2,7 @@ package me.logan.campwarpsv2;
 
 import me.logan.campwarpsv2.Listeners.GuiListener;
 import me.logan.campwarpsv2.commands.Camp;
+import me.logan.campwarpsv2.commands.CampReloadCommand;
 import me.logan.campwarpsv2.commands.delCamp;
 import me.logan.campwarpsv2.commands.setCamp;
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ public final class Main extends JavaPlugin {
         camp = new Camp(this);
         new setCamp(this);
         new delCamp(this);
+        new CampReloadCommand(this);
         Bukkit.getPluginManager().registerEvents(new GuiListener(this), this);
 
 

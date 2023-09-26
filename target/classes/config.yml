@@ -1,15 +1,5 @@
 GuiName: Camps
 GuiSize: 27
-filler-blocks:
-  type:
-    slots:
-# example
-# filler-blocks:
-# type: GLASS
-#   slots:
-#     - 1
-#     - 2
-#     - 3
-#     - 4
-#     - 5
-#     - 6
+FillerBlock:
+  Type: BLACK_STAINED_GLASS_PANE
+  Slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

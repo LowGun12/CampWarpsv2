@@ -48,6 +48,15 @@ public class Camp implements CommandExecutor {
                     ItemStack campItem = ItemStackSerializer.deserializeItemStack(serializedItem);
                     if (campItem != null) {
                         int slot = plugin.getConfig().getInt(path + ".Slot", 0);
+
+                        String campName = key;
+                        campName = ColorUtils.colorize(campName);
+                        ItemMeta campItemMeta = campItem.getItemMeta();
+                        if (campItemMeta != null) {
+                            campItemMeta.setDisplayName(campName);
+                            campItem.setItemMeta(campItemMeta);
+                        }
+
                         campGui.setItem(slot, campItem);
                         plugin.getLogger().info("Added item to camp gui " + campItem.getType().toString());
                     }
@@ -55,13 +64,26 @@ public class Camp implements CommandExecutor {
             }
         }
 
-        for (int i = 0; i < size; i++) {
-            if (campGui.getItem(i) == null) {
-                ItemStack filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);;
-                campGui.setItem(i, filler);
+        if (plugin.getConfig().contains("FillerBlock")) {
+            String fillerBlockString = plugin.getConfig().getString("FillerBlock.Type");
+            Material fillerBlockType = Material.getMaterial(fillerBlockString);
+            if (fillerBlockType != null) {
+                List<Integer> fillerBlockSlots = plugin.getConfig().getIntegerList("FillerBlock.Slots");
+                for (int slot : fillerBlockSlots) {
+                    if (slot >= 0 && slot < size) {
+                        ItemStack fillerBlock = new ItemStack(fillerBlockType);
+                        ItemMeta fillerBlockMeta = fillerBlock.getItemMeta();
+                        fillerBlockMeta.setDisplayName(" ");
+                        fillerBlock.setItemMeta(fillerBlockMeta);
+                        campGui.setItem(slot, fillerBlock);
+                    } else {
+                        plugin.getLogger().warning("Invalid slot specified in FillerBlock configuration: " + slot);
+                    }
+                }
+            } else {
+                plugin.getLogger().warning("Invalid FillerBlock material type specified in the configuration.");
             }
         }
-
         return campGui;
     }
 
