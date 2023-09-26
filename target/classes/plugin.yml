@@ -1,0 +1,18 @@
+name: CampWarpsv2
+version: '1.0-SNAPSHOT'
+main: me.logan.campwarpsv2.Main
+api-version: 1.20
+authors: [ Logan ]
+description: Updated / customisable camp warps plugin
+commands:
+  camp:
+    aliases:
+      - camp
+      - camps
+      - wild
+      - rtp
+      - randomtp
+  setcamp:
+    permission: camp.setwarp
+  delcamp:
+    permission: camp.delwarp

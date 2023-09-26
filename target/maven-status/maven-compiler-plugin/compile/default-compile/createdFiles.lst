@@ -1,0 +1,8 @@
+me\logan\campwarpsv2\commands\delCamp.class
+me\logan\campwarpsv2\commands\Camp.class
+me\logan\campwarpsv2\commands\setCamp.class
+me\logan\campwarpsv2\Main.class
+me\logan\campwarpsv2\Utils\ItemStackSerializer.class
+me\logan\campwarpsv2\Utils\ColorUtils.class
+me\logan\campwarpsv2\Listeners\GuiListener$1.class
+me\logan\campwarpsv2\Listeners\GuiListener.class
