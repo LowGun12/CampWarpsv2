@@ -1,4 +1,4 @@
-package me.logan.campwarspv2.Utils;
+package me.logan.campwarpsv2.Utils;
 
 import org.bukkit.ChatColor;
 

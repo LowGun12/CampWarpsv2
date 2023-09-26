@@ -1,12 +1,11 @@
-package me.logan.campwarspv2.Listeners;
+package me.logan.campwarpsv2.Listeners;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import me.logan.campwarspv2.Main;
-import me.logan.campwarspv2.Utils.ColorUtils;
-import org.bukkit.Bukkit;
+import me.logan.campwarpsv2.Main;
+import me.logan.campwarpsv2.Utils.ColorUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

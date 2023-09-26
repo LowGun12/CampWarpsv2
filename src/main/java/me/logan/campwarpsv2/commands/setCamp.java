@@ -1,10 +1,8 @@
-package me.logan.campwarspv2.commands;
+package me.logan.campwarpsv2.commands;
 
-import me.logan.campwarspv2.Main;
-import me.logan.campwarspv2.Utils.ColorUtils;
-import me.logan.campwarspv2.Utils.ItemStackSerializer;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import me.logan.campwarpsv2.Main;
+import me.logan.campwarpsv2.Utils.ColorUtils;
+import me.logan.campwarpsv2.Utils.ItemStackSerializer;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,12 +29,17 @@ public class setCamp implements CommandExecutor {
             Player player = (Player) sender;
             if (!(player.hasPermission("camp.setwarp"))) {
                 player.sendMessage(ColorUtils.colorize("&cNo permission for this"));
+                return false;
             }
 
-                if (args.length < 1) {
-                    player.sendMessage(ColorUtils.colorize("&cUsage: /setcamp <name>"));
-                    return true;
-                }
+            if (args.length < 1) {
+                player.sendMessage(ColorUtils.colorize("&cUsage: /setcamp <name>"));
+                return false;
+            }
+            ItemStack mainHandCheck = player.getInventory().getItemInMainHand();
+            if (mainHandCheck == null || mainHandCheck.getType().isAir()) {
+                player.sendMessage(ColorUtils.colorize("&cYou must be holding an item in your main hand to use this command"));
+            } else {
 
                 String campName = args[0];
                 String configCampName = campName.toLowerCase();
@@ -71,6 +74,7 @@ public class setCamp implements CommandExecutor {
                     }
                 }
             }
+        }
         return true;
     }
 }

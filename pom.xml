@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.Logan</groupId>
-    <artifactId>CampWarspv2</artifactId>
+    <artifactId>CampWarpsv2</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>CampWarspv2</name>
+    <name>CampWarpsv2</name>
 
     <description>Updated / customisable camp warps plugin</description>
     <properties>

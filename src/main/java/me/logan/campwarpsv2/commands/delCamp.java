@@ -1,7 +1,7 @@
-package me.logan.campwarspv2.commands;
+package me.logan.campwarpsv2.commands;
 
-import me.logan.campwarspv2.Main;
-import me.logan.campwarspv2.Utils.ColorUtils;
+import me.logan.campwarpsv2.Main;
+import me.logan.campwarpsv2.Utils.ColorUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

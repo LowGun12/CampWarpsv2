@@ -1,16 +1,21 @@
-package me.logan.campwarspv2.commands;
+package me.logan.campwarpsv2.commands;
 
-import me.logan.campwarspv2.Main;
-import me.logan.campwarspv2.Utils.ColorUtils;
-import me.logan.campwarspv2.Utils.ItemStackSerializer;
+import me.logan.campwarpsv2.Main;
+import me.logan.campwarpsv2.Utils.ColorUtils;
+import me.logan.campwarpsv2.Utils.ItemStackSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
+import java.util.Map;
 
 
 public class Camp implements CommandExecutor {
@@ -34,7 +39,7 @@ public class Camp implements CommandExecutor {
         int size = plugin.getConfig().getInt("GuiSize");
         Inventory campGui = Bukkit.createInventory(null, size, ChatColor.GREEN.toString() + ChatColor.BOLD + plugin.getConfig().getString("GuiName"));
 
-        // Load camp items from the configuration and add them to the inventory
+
         if (plugin.getConfig().contains("camps")) {
             for (String key : plugin.getConfig().getConfigurationSection("camps").getKeys(false)) {
                 String path = "camps." + key;
@@ -47,6 +52,13 @@ public class Camp implements CommandExecutor {
                         plugin.getLogger().info("Added item to camp gui " + campItem.getType().toString());
                     }
                 }
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+            if (campGui.getItem(i) == null) {
+                ItemStack filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);;
+                campGui.setItem(i, filler);
             }
         }
 

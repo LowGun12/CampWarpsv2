@@ -1,14 +1,12 @@
-package me.logan.campwarspv2;
+package me.logan.campwarpsv2;
 
-import me.logan.campwarspv2.Listeners.GuiListener;
-import me.logan.campwarspv2.commands.Camp;
-import me.logan.campwarspv2.commands.delCamp;
-import me.logan.campwarspv2.commands.setCamp;
+import me.logan.campwarpsv2.Listeners.GuiListener;
+import me.logan.campwarpsv2.commands.Camp;
+import me.logan.campwarpsv2.commands.delCamp;
+import me.logan.campwarpsv2.commands.setCamp;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-import me.logan.campwarspv2.Utils.ItemStackSerializer;
 
 public final class Main extends JavaPlugin {
 
@@ -17,7 +15,7 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        loadConfig();
+        saveDefaultConfig();
         camp = new Camp(this);
         new setCamp(this);
         new delCamp(this);
@@ -26,18 +24,10 @@ public final class Main extends JavaPlugin {
 
     }
 
-
     public Camp getGuiClass()
     {
         return camp;
     }
-
-    private void loadConfig() {
-        getConfig().options().copyDefaults(true);
-        saveConfig();
-    }
-
-
 
 
 }
